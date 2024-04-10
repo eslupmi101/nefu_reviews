@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "bot"
+version = "0.1.0"
+description = ""
+authors = ["eslupmi101 <ajsen-andreev@yandex.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiogram = "3.4.1"
+alembic = "1.13.1"
+sqlalchemy = "2.0.27"
+redis = "5.0.1"
+loguru = "0.7.2"
+pydantic = "2.5.3"
+asyncpg = "^0.29.0"
+pydantic-settings = "2.2.1"
+psycopg2 = "^2.9.9"
+greenlet = "^3.0.3"
+uuid = "^1.30"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
