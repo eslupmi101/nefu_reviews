@@ -34,10 +34,8 @@ async def add_review(
     review: str
 ):
     """Add a review to the database."""
-    from uuid import uuid1
 
     review = ReviewModel(
-        id=int(uuid1()) % 10000,
         user_id=user.id,
         review=review
     )
