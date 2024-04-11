@@ -12,7 +12,7 @@ router = Router(name='обращения')
 
 
 @router.message(ReviewStates.create_review)
-async def start_command_handler(
+async def create_review_handler(
     message: types.Message,
     state: FSMContext,
     session: AsyncSession,
@@ -25,7 +25,7 @@ async def start_command_handler(
         return
 
     await message.answer(
-        'Спасибо, за обращение!',
+        'Спасибо за обращение!',
         reply_markup=MAIN_MENU_KB
     )
     await state.set_state(MainMenuStates.main_level)

@@ -43,6 +43,6 @@ async def wait_full_name_handler(message: types.Message, state: FSMContext, sess
     # Переключение состояния
     await state.set_state(MainMenuStates.main_level)
     await message.answer(
-        f'Спасибо, за регистрацию {full_name}. Теперь вы можете оставить свое обращение.',
+        f'Спасибо за регистрацию {full_name}. Теперь вы можете оставить свое обращение.',
         reply_markup=MAIN_MENU_KB
     )
