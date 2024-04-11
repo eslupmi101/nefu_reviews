@@ -24,13 +24,14 @@ async def start_command_handler(
         await message.reply('Введите текст обращения')
         return
 
+    await message.answer(
+        'Спасибо, за обращение!',
+        reply_markup=MAIN_MENU_KB
+    )
+    await state.set_state(MainMenuStates.main_level)
+
     await add_review(
         session,
         user,
         review
-    )
-    await state.set_state(MainMenuStates.main_level)
-    await message.answer(
-        'Спасибо, за обращение!',
-        reply_markup=MAIN_MENU_KB
     )
