@@ -37,7 +37,7 @@ async def all_reviews(message: types.Message, state: FSMContext, session: AsyncS
         inline_keyboard=[[
             InlineKeyboardButton(
                 text='Обращения',
-                url=f'{settings.REVIEWS_HUB_URL}/?telegram_id={message.from_user.id}/'
+                url=f'{settings.REVIEWS_HUB_URL}/?telegram_id={message.from_user.id}'
             )
         ]]
     )
