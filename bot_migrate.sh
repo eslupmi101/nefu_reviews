@@ -10,7 +10,7 @@ fi
 container_id=$1
 
 # Формируем команду для выполнения в контейнере
-command="docker exec $container_id poetry run alembic upgrade head"
+command="sudo docker exec $container_id poetry run alembic upgrade head"
 
 # Выполняем команду
 echo "Выполняется команда в контейнере $container_id: $command"
