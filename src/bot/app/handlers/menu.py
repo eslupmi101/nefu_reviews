@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database.models.user import UserModel
 from app.core.config import settings
 from app.keyboards.reply.menu import MAIN_MENU_KB
+from app.keyboards.reply.review import REVIEW_KB
 from .states.menu import MainMenuStates
 from .states.review import ReviewStates
 
@@ -14,16 +15,18 @@ router = Router(name='Основное меню')
 
 
 @router.message(MainMenuStates.main_level, F.text == 'Создать обращение')
-async def to_create_review_handler(message: types.Message, state: FSMContext):
+async def to_create_review_handler(
+    message: types.Message,
+    state: FSMContext
+):
     # Имитация имени из базы данных
     text = (
         'Введите текст обращения. \n'
         'Так же вы можете отправить до 5 фотографий.'
     )
-
     await message.answer(
         text,
-        reply_markup=None
+        reply_markup=REVIEW_KB
     )
     await state.set_state(ReviewStates.create_review)
 

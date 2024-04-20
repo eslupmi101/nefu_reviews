@@ -32,7 +32,7 @@ async def add_review(
     session: AsyncSession,
     user: UserModel,
     review: str,
-    photos: list[str]
+    photos: list[str] | None = None
 ):
     """
     Add a review to the database.
@@ -44,11 +44,17 @@ async def add_review(
     - photos (List[str]): List of photo filenames associated with the review.
     """
 
-    instance = ReviewModel(
-        user_id=user.id,
-        review=review,
-        photos=photos
-    )
+    if photos is not None:
+        instance = ReviewModel(
+            user_id=user.id,
+            review=review,
+            photos=photos
+        )
+    else:
+        instance = ReviewModel(
+            user_id=user.id,
+            review=review
+        )
 
     session.add(instance)
     await session.commit()

@@ -21,7 +21,7 @@ class EnvBaseSettings(BaseSettings):
     )
 
 
-class BotSettings:
+class BotSettings(BaseSettings):
     BOT_TOKEN: str
     SUPPORT_URL: str | None = None
     RATE_LIMIT: int | float = 0.5  # for throttling control

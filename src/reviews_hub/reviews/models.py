@@ -30,7 +30,7 @@ class User(AbstractUser):
         UserTelegram,
         on_delete=models.CASCADE,
         primary_key=True,
-        related_name='user_telegram'
+        related_name='django_user'
     )
 
     class Meta:
@@ -40,7 +40,10 @@ class User(AbstractUser):
 class Review(models.Model):
     id = models.AutoField(primary_key=True)
     review = models.TextField()
-    user = models.ForeignKey(UserTelegram, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        UserTelegram,
+        on_delete=models.CASCADE
+    )
     likes = models.IntegerField(default=0)
     photos = ArrayField(
         models.CharField(max_length=255),
