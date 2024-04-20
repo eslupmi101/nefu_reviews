@@ -1,9 +1,16 @@
 version: "3"
 
-services: 
+services:
+  review_hub:
+    build: ./src/review_hub/.
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
   bot:
     build: ./src/bot/.
-    container_name: bot
     restart: always
     env_file:
       - .env
