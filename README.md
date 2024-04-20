@@ -15,7 +15,7 @@ docker compose -f docker-compose.yml up -d
 docker-compose -f docker-compose.yml up -d
 ```
 
-Провести миграции через скрипт. Указать id контейнера с ботом
+Провести миграции через скрипт. Указать id контейнера с ботом и с интерфейсом
 ```
 ./bot_migrate.sh
 ```
