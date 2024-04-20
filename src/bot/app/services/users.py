@@ -31,16 +31,26 @@ async def add_user(
 async def add_review(
     session: AsyncSession,
     user: UserModel,
-    review: str
+    review: str,
+    photos: list[str]
 ):
-    """Add a review to the database."""
+    """
+    Add a review to the database.
 
-    review = ReviewModel(
+    :param
+    - session (AsyncSession): Async database session.
+    - user (UserModel): User object representing the author of the review.
+    - review (str): The text content of the review.
+    - photos (List[str]): List of photo filenames associated with the review.
+    """
+
+    instance = ReviewModel(
         user_id=user.id,
-        review=review
+        review=review,
+        photos=photos
     )
 
-    session.add(review)
+    session.add(instance)
     await session.commit()
 
 

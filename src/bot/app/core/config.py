@@ -10,6 +10,7 @@ load_dotenv()
 DIR = Path(__file__).absolute().parent.parent.parent
 BOT_DIR = Path(__file__).absolute().parent.parent
 LOCALES_DIR = f'{BOT_DIR}/locales'
+MEDIA_DIR = f'{DIR}/mediafiles'
 
 
 class EnvBaseSettings(BaseSettings):
@@ -24,6 +25,7 @@ class BotSettings:
     BOT_TOKEN: str
     SUPPORT_URL: str | None = None
     RATE_LIMIT: int | float = 0.5  # for throttling control
+    REVIEWS_HUB_URL: str | None = None
 
 
 class DBSettings(EnvBaseSettings):

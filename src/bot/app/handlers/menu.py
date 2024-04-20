@@ -1,9 +1,10 @@
 from aiogram import F, Router, types
 from aiogram.fsm.context import FSMContext
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.services.users import get_all_review_texts
 from app.database.models.user import UserModel
+from app.core.config import settings
 from app.keyboards.reply.menu import MAIN_MENU_KB
 from .states.menu import MainMenuStates
 from .states.review import ReviewStates
@@ -12,19 +13,34 @@ from .states.review import ReviewStates
 router = Router(name='Основное меню')
 
 
-@router.message(MainMenuStates.main_level, F.text == 'Оставить обращение')
+@router.message(MainMenuStates.main_level, F.text == 'Создать обращение')
 async def to_create_review_handler(message: types.Message, state: FSMContext):
     # Имитация имени из базы данных
-    await message.answer('Введите текст обращения')
+    text = (
+        'Введите текст обращения. \n'
+        'Так же вы можете отправить до 5 фотографий.'
+    )
+
+    await message.answer(
+        text,
+        reply_markup=None
+    )
     await state.set_state(ReviewStates.create_review)
 
 
 @router.message(MainMenuStates.main_level, F.text == 'Все обращения')
 async def all_reviews(message: types.Message, state: FSMContext, session: AsyncSession):
-    review_texts = await get_all_review_texts(session)
+    keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[[
+            InlineKeyboardButton(
+                text='Обращения',
+                url=f'{settings.REVIEWS_HUB_URL}/?telegram_id={message.from_user.id}/'
+            )
+        ]]
+    )
     await message.answer(
-        '\n'.join(review_texts),
-        reply_markup=MAIN_MENU_KB
+        'Просмотр всех обращений',
+        reply_markup=keyboard
     )
 
 

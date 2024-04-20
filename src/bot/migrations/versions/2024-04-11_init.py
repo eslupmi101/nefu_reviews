@@ -1,8 +1,8 @@
-"""Change id to authoincrement
+"""Init
 
-Revision ID: 959a2afb5f07
+Revision ID: c62f47cca776
 Revises: 
-Create Date: 2024-04-11 17:22:20.766837
+Create Date: 2024-04-11 21:20:40.859146
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '959a2afb5f07'
+revision: str = 'c62f47cca776'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -31,9 +31,10 @@ def upgrade() -> None:
     )
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('likes', sa.Integer(), nullable=True),
     sa.Column('review', sa.String(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('photos', sa.ARRAY(sa.String()), nullable=True),
+    sa.Column('likes', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text("TIMEZONE('utc', now())"), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id', 'user_id')
